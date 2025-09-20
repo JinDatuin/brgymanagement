@@ -10,4 +10,19 @@ class ResidentController extends Controller
     {
         return view('resident.dashboard');
     }
+
+    public function services()
+    {
+        return view('resident.services');
+    }
+
+    public function complaints()
+    {
+        return view('resident.complaints');
+    }
+
+    public function requests()
+    {
+        return view('resident.requests');
+    }
 }

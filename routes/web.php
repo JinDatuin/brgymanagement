@@ -81,6 +81,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/senior/dashboard', [SeniorController::class, 'dashboard'])->name('senior.dashboard');
     Route::get('/4ps/dashboard', [FourpsController::class, 'dashboard'])->name('4ps.dashboard');
     Route::get('/resident/dashboard', [ResidentController::class, 'dashboard'])->name('resident.dashboard');
+    Route::get('/resident/services', [ResidentController::class, 'services'])->name('resident.services');
+    Route::get('/resident/complaints', [ResidentController::class, 'complaints'])->name('resident.complaints');
+    Route::get('/resident/requests', [ResidentController::class, 'requests'])->name('resident.requests');
 });
 
 Route::middleware(['auth'])->group(function () {
