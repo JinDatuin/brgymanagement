@@ -45,6 +45,7 @@ class ResidentRegistrationController extends Controller
             'household_no' => $request->household_no,
             'purok_no' => $request->purok_no,
             'sitio' => $request->sitio,
+            'email' => $request->email,
         ]);
 
         $user = User::create([
