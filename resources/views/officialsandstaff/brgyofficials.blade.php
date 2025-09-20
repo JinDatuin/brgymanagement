@@ -1,4 +1,4 @@
-@extends('dashboard')
+@extends('admin.dashboard')
 
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

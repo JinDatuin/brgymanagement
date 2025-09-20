@@ -14,7 +14,7 @@ class BarangayofficialsController extends Controller
     {
         $officials = BarangayOfficial::with('resident')->get();
 
-        return view('admin.brgyofficials', compact('officials'));
+        return view('officialsandstaff.brgyofficials', compact('officials'));
     }
 
     /**

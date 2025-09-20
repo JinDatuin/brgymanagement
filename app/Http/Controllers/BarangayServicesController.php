@@ -11,7 +11,7 @@ class BarangayServicesController extends Controller
     // Show the list of barangay services
     public function webgenerallayout(){
         $services = BarangayServices::all(); // Fetch all barangay services
-        return view("admin.webgenerallayout", compact('services'));
+        return view("webgenerallayout", compact('services'));
     }
 
     // Show the form to add a new barangay service
