@@ -13,17 +13,17 @@ class ResidentController extends Controller
     {
         $user = Auth::user();
         $resident = Resident::where('email', $user->email)->first();
-        return view('resident.dashboard', compact('resident'));
+        return view('admin.resident.dashboard', compact('resident'));
     }
 
     public function services()
     {
-        return view('resident.services');
+        return view('admin.resident.services');
     }
 
     public function complaints()
     {
-        return view('resident.complaints');
+        return view('admin.resident.complaints');
     }
 
     public function requests()
@@ -37,6 +37,6 @@ class ResidentController extends Controller
             $requests = collect(); // Empty collection if no resident found
         }
 
-        return view('resident.requests', compact('resident', 'requests'));
+        return view('admin.resident.requests', compact('resident', 'requests'));
     }
 }

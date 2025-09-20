@@ -12,7 +12,7 @@ class AuthController extends Controller
     // Show Login Form
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('admin.auth.login');
     }
 
     // Handle Login Request
@@ -27,7 +27,7 @@ class AuthController extends Controller
             $user = Auth::user();
 
             if ($user->role === 'admin') {
-                return redirect()->route('dashboard')->with('success', 'Welcome Admin!');
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome Admin!');
             } elseif ($user->role === 'user') {
                 return redirect()->route('skuser.dashboard')->with('success', 'Welcome User!');
             } elseif ($user->role === 'BHW') {
@@ -47,7 +47,7 @@ class AuthController extends Controller
     // Show Registration Form
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('admin.auth.register');
     }
 
     // Handle Registration Request
