@@ -84,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/resident/services', [ResidentController::class, 'services'])->name('resident.services');
     Route::get('/resident/complaints', [ResidentController::class, 'complaints'])->name('resident.complaints');
     Route::get('/resident/requests', [ResidentController::class, 'requests'])->name('resident.requests');
+    Route::get('/barangay-official/dashboard', [BarangayofficialsController::class, 'dashboard'])->name('barangay_official.dashboard');
 });
 
 Route::middleware(['auth'])->group(function () {

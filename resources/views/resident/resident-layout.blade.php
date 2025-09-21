@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8" />
@@ -150,68 +151,69 @@
 
         /* Profile Container */
         .profile-container {
-    margin-left: auto;
-}
+            margin-left: auto;
+        }
 
-.profile-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    color: var(--text-light);
-}
+        .profile-btn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: var(--text-light);
+        }
 
-.profile-btn:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
+        .profile-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-.profile-img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
 
-.profile-name {
-    font-weight: 500;
-    font-size: 0.9rem;
-    line-height: 1.2;
-}
+        .profile-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
 
-/* Dropdown Menu */
-.dropdown-menu {
-    border: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-}
+        /* Dropdown Menu */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+        }
 
-.dropdown-item {
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-    color: #495057;
-}
+        .dropdown-item {
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            color: #495057;
+        }
 
-/* Blue hover for Edit Profile */
-.dropdown-option:first-child .dropdown-item:hover {
-    background-color: #e7f1ff;
-    color: #0d6efd;
-}
+        /* Blue hover for Edit Profile */
+        .dropdown-option:first-child .dropdown-item:hover {
+            background-color: #e7f1ff;
+            color: #0d6efd;
+        }
 
-/* Red hover for Logout */
-.dropdown-option:last-child .dropdown-item:hover {
-    background-color: #fff0f0;
-    color: #dc3545;
-}
+        /* Red hover for Logout */
+        .dropdown-option:last-child .dropdown-item:hover {
+            background-color: #fff0f0;
+            color: #dc3545;
+        }
 
-/* Icon alignment */
-.fa-user-circle,
-.fa-sign-out-alt {
-    width: 1.25em;
-    text-align: center;
-}
+        /* Icon alignment */
+        .fa-user-circle,
+        .fa-sign-out-alt {
+            width: 1.25em;
+            text-align: center;
+        }
+
         /* Nested Dropdown */
         .dropdown-content {
             display: none;
@@ -259,9 +261,17 @@
 
         /* Animations */
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         .menu-toggle.active {
@@ -306,137 +316,150 @@
         }
     </style>
 </head>
+
 <body>
 
-<!-- Sidebar Navigation -->
-<nav class="sidebar" id="sidebar">
-    <!-- Header Row -->
-    <div class="header-row">
-        <!-- Menu Toggle -->
-        <button class="menu-toggle" onclick="toggleSidebar()">
-            <i class="fa-solid fa-bars"></i>
-        </button>
-        <div class="profile-container dropdown">
-            <button class="profile-btn dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="{{ Auth::user() && Auth::user()->image ? asset('storage/profile_images/' . Auth::user()->image) : asset('images/images1.jpg') }}"
-                    alt="Admin Profile" class="profile-img me-2">
-                <div class="d-flex flex-column">
-                    <span class="profile-name">Administrator</span>
-
-                </div>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar" id="sidebar">
+        <!-- Header Row -->
+        <div class="header-row">
+            <!-- Menu Toggle -->
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
             </button>
+            <div class="profile-container dropdown">
+                <button class="profile-btn dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img src="{{ Auth::user() && Auth::user()->image ? asset('storage/profile_images/' . Auth::user()->image) : asset('images/images1.jpg') }}"
+                        alt="Admin Profile" class="profile-img me-2">
+                    <div class="d-flex flex-column">
+                        <span class="profile-name">{{ Auth::user()->name ?? 'User' }}</span>
 
-            <div class="dropdown-menu dropdown-menu-end" style="min-width: 170px;">
-                <div class="dropdown-option">
-                    <a href="{{ route('partials.profile')}}" class="dropdown-item d-flex align-items-center px-3 py-2 rounded">
-                        <i class="fas fa-user-circle me-3"></i>
-                        <span>Edit Profile</span>
-                    </a>
-                </div>
-                <div class="dropdown-option">
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="dropdown-item d-flex align-items-center px-3 py-2 rounded w-100">
-                            <i class="fas fa-sign-out-alt me-3"></i>
-                            <span>Logout</span>
-                        </button>
-                    </form>
+                    </div>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-end" style="min-width: 170px;">
+                    <div class="dropdown-option">
+                        <a href="{{ route('partials.profile')}}"
+                            class="dropdown-item d-flex align-items-center px-3 py-2 rounded">
+                            <i class="fas fa-user-circle me-3"></i>
+                            <span>Edit Profile</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-option">
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit"
+                                class="dropdown-item d-flex align-items-center px-3 py-2 rounded w-100">
+                                <i class="fas fa-sign-out-alt me-3"></i>
+                                <span>Logout</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <ul>
+            <li><a href="{{ route('resident.dashboard') }}"
+                    class="{{ request()->routeIs('resident.dashboard') ? 'active' : '' }}"><i class="fas fa-home"></i>
+                    <span>Dashboard</span></a></li>
+            <li><a href="{{ route('resident.services') }}"
+                    class="{{ request()->routeIs('resident.services') ? 'active' : '' }}"><i
+                        class="fas fa-concierge-bell"></i> <span>Barangay Services</span></a></li>
+            <li><a href="{{ route('resident.complaints') }}"
+                    class="{{ request()->routeIs('resident.complaints') ? 'active' : '' }}"><i
+                        class="fas fa-comment-dots"></i> <span>Complaint & Feedback</span></a></li>
+            <li><a href="{{ route('resident.requests') }}"
+                    class="{{ request()->routeIs('resident.requests') ? 'active' : '' }}"><i
+                        class="fas fa-file-alt"></i> <span>My request</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        @yield('content')
     </div>
 
-    <ul>
-        <li><a href="{{ route('resident.dashboard') }}" class="{{ request()->routeIs('resident.dashboard') ? 'active' : '' }}"><i class="fas fa-home"></i> <span>Dashboard</span></a></li>
-        <li><a href="{{ route('resident.services') }}" class="{{ request()->routeIs('resident.services') ? 'active' : '' }}"><i class="fas fa-concierge-bell"></i> <span>Barangay Services</span></a></li>
-        <li><a href="{{ route('resident.complaints') }}" class="{{ request()->routeIs('resident.complaints') ? 'active' : '' }}"><i class="fas fa-comment-dots"></i> <span>Complaint & Feedback</span></a></li>
-        <li><a href="{{ route('resident.requests') }}" class="{{ request()->routeIs('resident.requests') ? 'active' : '' }}"><i class="fas fa-file-alt"></i> <span>My request</span></a></li>
-    </ul>
-</nav>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Main Content -->
-<div class="main-content" id="main-content">
-    @yield('content')
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Set active link based on current route
+            const currentPath = window.location.pathname;
+            const links = document.querySelectorAll(".sidebar ul li a");
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Set active link based on current route
-        const currentPath = window.location.pathname;
-        const links = document.querySelectorAll(".sidebar ul li a");
-
-        links.forEach(link => {
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.add('active');
-
-                // If this is a nested link, ensure parent dropdown is visible
-                const dropdown = link.closest('.dropdown-content');
-                if (dropdown) {
-                    dropdown.style.display = 'block';
-                    dropdown.previousElementSibling.classList.add('active');
+                    // If this is a nested link, ensure parent dropdown is visible
+                    const dropdown = link.closest('.dropdown-content');
+                    if (dropdown) {
+                        dropdown.style.display = 'block';
+                        dropdown.previousElementSibling.classList.add('active');
+                    }
                 }
-            }
 
-            link.addEventListener("click", function (e) {
-                if (this.getAttribute('href') === '#') return;
+                link.addEventListener("click", function (e) {
+                    if (this.getAttribute('href') === '#') return;
 
-                links.forEach(l => l.classList.remove("active"));
-                this.classList.add("active");
-                localStorage.setItem("activeLink", this.getAttribute("href"));
+                    links.forEach(l => l.classList.remove("active"));
+                    this.classList.add("active");
+                    localStorage.setItem("activeLink", this.getAttribute("href"));
+                });
             });
+
+            // Restore active link from localStorage
+            const activeLink = localStorage.getItem("activeLink");
+            if (activeLink) {
+                links.forEach(link => {
+                    if (link.getAttribute("href") === activeLink) {
+                        link.classList.add("active");
+                    }
+                });
+            }
         });
 
-        // Restore active link from localStorage
-        const activeLink = localStorage.getItem("activeLink");
-        if (activeLink) {
-            links.forEach(link => {
-                if (link.getAttribute("href") === activeLink) {
-                    link.classList.add("active");
-                }
-            });
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('main-content');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('collapsed');
+            menuToggle.classList.toggle('active');
+
+            // Store sidebar state in localStorage
+            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
         }
-    });
 
-    function toggleSidebar() {
-        const sidebar = document.getElementById('sidebar');
-        const mainContent = document.getElementById('main-content');
-        const menuToggle = document.querySelector('.menu-toggle');
+        function toggleDropdown(event) {
+            event.preventDefault();
+            let dropdown = event.target.closest('.dropdown');
+            dropdown.classList.toggle('active');
 
-        sidebar.classList.toggle('collapsed');
-        mainContent.classList.toggle('collapsed');
-        menuToggle.classList.toggle('active');
-
-        // Store sidebar state in localStorage
-        localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
-    }
-
-    function toggleDropdown(event) {
-        event.preventDefault();
-        let dropdown = event.target.closest('.dropdown');
-        dropdown.classList.toggle('active');
-
-        // Close other dropdowns when opening a new one
-        if (dropdown.classList.contains('active')) {
-            document.querySelectorAll('.dropdown').forEach(item => {
-                if (item !== dropdown) {
-                    item.classList.remove('active');
-                }
-            });
+            // Close other dropdowns when opening a new one
+            if (dropdown.classList.contains('active')) {
+                document.querySelectorAll('.dropdown').forEach(item => {
+                    if (item !== dropdown) {
+                        item.classList.remove('active');
+                    }
+                });
+            }
         }
-    }
 
-    // Initialize sidebar state from localStorage
-    window.addEventListener('load', function() {
-        if (localStorage.getItem('sidebarCollapsed') === 'true') {
-            document.getElementById('sidebar').classList.add('collapsed');
-            document.getElementById('main-content').classList.add('collapsed');
-        }
-    });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        // Initialize sidebar state from localStorage
+        window.addEventListener('load', function () {
+            if (localStorage.getItem('sidebarCollapsed') === 'true') {
+                document.getElementById('sidebar').classList.add('collapsed');
+                document.getElementById('main-content').classList.add('collapsed');
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

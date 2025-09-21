@@ -12,7 +12,7 @@ class ResidentRegistrationController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('admin.auth.resident-register');
+        return view('auth.resident-register');
     }
 
     public function register(Request $request)

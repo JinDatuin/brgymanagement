@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BarangayOfficial;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Resident;
 
 class AuthController extends Controller
 {
@@ -37,7 +39,12 @@ class AuthController extends Controller
             } elseif ($user->role === '4ps') {
                 return redirect()->route('4ps.dashboard')->with('success', 'Welcome 4ps!');
             } elseif ($user->role === 'resident') {
-                return redirect()->route('resident.dashboard')->with('success', 'Welcome Resident!');
+                    $resident = Resident::where('email', $user->email)->first();
+                if (BarangayOfficial::where('resident_id', $resident->id)->exists()) {
+                    return redirect()->route('barangay_official.dashboard', ['id' => $resident->id])->with('success', 'Welcome Barangay Official!');
+                } else {
+                    return redirect()->route('resident.dashboard')->with('success', 'Welcome Resident!');
+                }
             }
         }
 
@@ -47,7 +54,7 @@ class AuthController extends Controller
     // Show Registration Form
     public function showRegistrationForm()
     {
-        return view('admin.auth.register');
+        return view('auth.register');
     }
 
     // Handle Registration Request
